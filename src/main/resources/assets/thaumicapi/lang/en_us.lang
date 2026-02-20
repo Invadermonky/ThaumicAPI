@@ -1,0 +1,4 @@
+# Commands
+command.thaumicapi:warpevent.invalid=Usage: /tapi warpevent <player> <warpevent> [playerwarp]
+command.thaumicapi:warpevent.success=
+command.thaumicapi:warpevent.usage=Usage: /tapi warpevent <player> <warpevent> [playerwarp]

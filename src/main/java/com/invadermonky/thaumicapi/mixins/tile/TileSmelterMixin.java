@@ -82,8 +82,7 @@ public abstract class TileSmelterMixin extends TileThaumcraftInventory {
             at = @At(
                     value = "INVOKE",
                     target = "Lthaumcraft/common/lib/utils/BlockStateUtils;getFacing(I)Lnet/minecraft/util/EnumFacing;"
-            ),
-            remap = true
+            )
     )
     private void overwriteSmelterAuxBehavior(CallbackInfo ci, @Local(ordinal = 0)LocalRef<EnumFacing> faceRef) {
         EnumFacing smelterFacing = BlockStateUtils.getFacing(this.getBlockMetadata());
