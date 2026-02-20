@@ -3,7 +3,7 @@ package com.invadermonky.thaumicapi.warpevents;
 import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
 import com.invadermonky.thaumicapi.events.PlayerWarpEvent;
 import com.invadermonky.thaumicapi.network.messages.MessageWarpEvent;
-import com.invadermonky.thaumicapi.utils.PlayerHelper;
+import com.invadermonky.thaumicapi.utils.helpers.PlayerHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.text.ITextComponent;
