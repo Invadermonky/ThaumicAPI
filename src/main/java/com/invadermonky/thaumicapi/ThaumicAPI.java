@@ -1,6 +1,7 @@
 package com.invadermonky.thaumicapi;
 
 import com.invadermonky.thaumicapi.commands.CommandThaumicAPI;
+import com.invadermonky.thaumicapi.network.NetworkHandlerTAPI;
 import com.invadermonky.thaumicapi.warpevents.WarpEventRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -27,6 +28,7 @@ public class ThaumicAPI {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        NetworkHandlerTAPI.init();
         WarpEventRegistry.loadFromDataTable(event.getAsmData());
     }
 

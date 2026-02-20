@@ -5,7 +5,7 @@ import com.invadermonky.thaumicapi.network.messages.MessageWarpEvent;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 
-public class PacketHandlerTAPI {
+public class NetworkHandlerTAPI {
     public static final SimpleNetworkWrapper INSTANCE = new SimpleNetworkWrapper(ThaumicAPI.MOD_ID);
 
     public static void init() {
