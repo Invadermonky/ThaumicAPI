@@ -43,7 +43,7 @@ public class SubCommandWarpEvent implements ISubCommand {
             return new ArrayList<>(CommandBase.getListOfStringsMatchingLastWord(args, WarpEventRegistry.WARP_EVENTS.keySet()));
         } else if(args.length == 4) {
             try {
-                EntityPlayer player = CommandBase.getPlayer(server, sender, args[2]);
+                EntityPlayer player = CommandBase.getPlayer(server, sender, args[1]);
                 return Collections.singletonList(String.valueOf(this.getPlayerTotalWarp(player)));
             } catch (Exception ignored) {}
         }
@@ -54,12 +54,12 @@ public class SubCommandWarpEvent implements ISubCommand {
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
         // /tapi warpevent @p thaumcraft.spiders_fake
         // /tapi warpevent <player> <warpevent> [playerwarp]
-        EntityPlayer player = CommandBase.getPlayer(server, sender, args[2]);
-        IWarpEvent warpEvent = WarpEventRegistry.getWarpEvent(args[3]);
+        EntityPlayer player = CommandBase.getPlayer(server, sender, args[1]);
+        IWarpEvent warpEvent = WarpEventRegistry.getWarpEvent(args[2]);
         if(warpEvent == null) {
             throw new CommandException(new TextComponentTranslation("command.thaumicapi:warpevent.invalid").getFormattedText());
         }
-        int warp = args.length == 4 ? CommandBase.parseInt(args[4]) : this.getPlayerTotalWarp(player);
+        int warp = args.length == 4 ? CommandBase.parseInt(args[3]) : this.getPlayerTotalWarp(player);
         WarpEventHandler.performWarpEvent(player, warp, warpEvent);
     }
 
