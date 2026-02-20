@@ -1,4 +1,4 @@
-package com.invadermonky.thaumicapi.warpevents;
+package com.invadermonky.thaumicapi.warpevents.events;
 
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,10 +28,12 @@ public class WarpEventUnnaturalHungerGreater extends WarpEventUnnaturalHunger {
 
     @Override
     public void performWarpEvent(EntityPlayer player, int warp) {
-        PotionEffect effect = new PotionEffect(PotionUnnaturalHunger.instance, 6000, Math.min(3, warp / 15), true, true);
-        effect.getCurativeItems().clear();
-        effect.addCurativeItem(new ItemStack(Items.ROTTEN_FLESH));
-        effect.addCurativeItem(new ItemStack(ItemsTC.brain));
-        player.addPotionEffect(effect);
+        if(!player.world.isRemote) {
+            PotionEffect effect = new PotionEffect(PotionUnnaturalHunger.instance, 6000, Math.min(3, warp / 15), true, true);
+            effect.getCurativeItems().clear();
+            effect.addCurativeItem(new ItemStack(Items.ROTTEN_FLESH));
+            effect.addCurativeItem(new ItemStack(ItemsTC.brain));
+            player.addPotionEffect(effect);
+        }
     }
 }

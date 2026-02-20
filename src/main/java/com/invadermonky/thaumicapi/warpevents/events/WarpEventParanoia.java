@@ -1,50 +1,44 @@
-package com.invadermonky.thaumicapi.warpevents;
+package com.invadermonky.thaumicapi.warpevents.events;
 
 import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 @WarpEvent
-public class WarpEventCreeperPrimed implements IWarpEvent {
+public class WarpEventParanoia implements IWarpEvent {
     @Override
     public @NotNull String getEventName() {
-        return "thaumcraft.creeper_primed";
+        return "thaumcraft.paranoia";
     }
 
     @Override
     public int getMinimumWarp() {
-        return 0;
+        return 8;
     }
 
     @Override
     public int getMaximumWarp() {
-        return 4;
+        return 12;
     }
 
     @Override
     public void playClientEventSound(EntityPlayer player, int warp) {
-        player.world.playSound(player, player.getPosition(), SoundEvents.ENTITY_CREEPER_PRIMED, SoundCategory.AMBIENT, 1.0F, 0.5F);
+
     }
 
-    @Nullable
     @Override
-    public ITextComponent getEventMessage(EntityPlayer player, int warp) {
-        return null;
+    public @Nullable ITextComponent getEventMessage(EntityPlayer player, int warp) {
+        return new TextComponentTranslation("warp.text.11").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE).setItalic(true));
     }
 
     @Override
     public void performWarpEvent(EntityPlayer player, int warp) {
 
-    }
-
-    @Override
-    public boolean isStressful() {
-        return true;
     }
 }

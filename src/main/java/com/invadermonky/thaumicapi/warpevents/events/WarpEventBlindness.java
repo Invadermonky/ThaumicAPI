@@ -1,32 +1,30 @@
-package com.invadermonky.thaumicapi.warpevents;
+package com.invadermonky.thaumicapi.warpevents.events;
 
 import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import thaumcraft.common.lib.potions.PotionDeathGaze;
 
 @WarpEvent
-public class WarpEventDeathGaze implements IWarpEvent {
+public class WarpEventBlindness implements IWarpEvent {
+
     @Override
     public @NotNull String getEventName() {
-        return "thaumcraft.death_gaze";
+        return "thaumcraft.blindness";
     }
 
     @Override
     public int getMinimumWarp() {
-        return 52;
+        return 68;
     }
 
     @Override
     public int getMaximumWarp() {
-        return 56;
+        return 72;
     }
 
     @Override
@@ -36,13 +34,14 @@ public class WarpEventDeathGaze implements IWarpEvent {
 
     @Override
     public @Nullable ITextComponent getEventMessage(EntityPlayer player, int warp) {
-        return new TextComponentTranslation("warp.text.4").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE).setItalic(true));
+        return null;
     }
 
     @Override
     public void performWarpEvent(EntityPlayer player, int warp) {
-        PotionEffect effect = new PotionEffect(PotionDeathGaze.instance, 6000, Math.min(3, warp / 15), true, true);
-        effect.getCurativeItems().clear();
-        player.addPotionEffect(effect);
+        if(!player.world.isRemote) {
+            PotionEffect effect = new PotionEffect(MobEffects.BLINDNESS, Math.min(32000, 5 * warp), 0, true, true);
+            player.addPotionEffect(effect);
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.invadermonky.thaumicapi.warpevents;
+package com.invadermonky.thaumicapi.warpevents.events;
 
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,25 +8,27 @@ import thaumcraft.common.lib.network.PacketHandler;
 import thaumcraft.common.lib.network.misc.PacketMiscEvent;
 
 @WarpEvent
-public class WarpEventSpawnMistGreater extends WarpEventSpawnMist {
+public class WarpEventSpawnMistMax extends WarpEventSpawnMist {
     @Override
     public @NotNull String getEventName() {
-        return "thaumcraft.spawn_mist_greater";
+        return "thaumcraft.spawn_mist_max";
     }
 
     @Override
     public int getMinimumWarp() {
-        return 64;
+        return 92;
     }
 
     @Override
     public int getMaximumWarp() {
-        return 68;
+        return Integer.MAX_VALUE;
     }
 
     @Override
     public void performWarpEvent(EntityPlayer player, int warp) {
-        PacketHandler.INSTANCE.sendTo(new PacketMiscEvent((byte)1), (EntityPlayerMP)player);
-        this.spawnGuardians(player, warp / 30);
+        if(!player.world.isRemote) {
+            PacketHandler.INSTANCE.sendTo(new PacketMiscEvent((byte) 1), (EntityPlayerMP) player);
+            this.spawnGuardians(player, warp / 15);
+        }
     }
 }

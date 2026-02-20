@@ -1,29 +1,32 @@
-package com.invadermonky.thaumicapi.warpevents;
+package com.invadermonky.thaumicapi.warpevents.events;
 
 import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import thaumcraft.common.lib.potions.PotionBlurredVision;
+import thaumcraft.common.lib.potions.PotionThaumarhia;
 
 @WarpEvent
-public class WarpEventBlurredVision implements IWarpEvent {
+public class WarpEventThaumarhia implements IWarpEvent {
     @Override
     public @NotNull String getEventName() {
-        return "thaumcraft.blurred_vision";
+        return "thaumcraft.thaumarhia";
     }
 
     @Override
     public int getMinimumWarp() {
-        return 32;
+        return 16;
     }
 
     @Override
     public int getMaximumWarp() {
-        return 36;
+        return 20;
     }
 
     @Override
@@ -33,12 +36,15 @@ public class WarpEventBlurredVision implements IWarpEvent {
 
     @Override
     public @Nullable ITextComponent getEventMessage(EntityPlayer player, int warp) {
-        return null;
+        return new TextComponentTranslation("warp.text.15").setStyle(new Style().setColor(TextFormatting.DARK_PURPLE).setItalic(true));
     }
 
     @Override
     public void performWarpEvent(EntityPlayer player, int warp) {
-        PotionEffect effect = new PotionEffect(PotionBlurredVision.instance, Math.min(32000, 10 * warp), 0, true, true);
-        player.addPotionEffect(effect);
+        if(!player.world.isRemote) {
+            PotionEffect effect = new PotionEffect(PotionThaumarhia.instance, Math.min(32000, 10 * warp), 0, true, true);
+            effect.getCurativeItems().clear();
+            player.addPotionEffect(effect);
+        }
     }
 }

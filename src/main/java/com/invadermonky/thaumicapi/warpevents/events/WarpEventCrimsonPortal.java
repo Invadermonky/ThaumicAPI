@@ -1,4 +1,4 @@
-package com.invadermonky.thaumicapi.warpevents;
+package com.invadermonky.thaumicapi.warpevents.events;
 
 import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
@@ -42,7 +42,9 @@ public class WarpEventCrimsonPortal implements IWarpEvent {
 
     @Override
     public void performWarpEvent(EntityPlayer player, int warp) {
-        this.spawnPortal(player);
+        if(!player.world.isRemote) {
+            this.spawnPortal(player);
+        }
     }
 
     protected void spawnPortal(EntityPlayer player) {

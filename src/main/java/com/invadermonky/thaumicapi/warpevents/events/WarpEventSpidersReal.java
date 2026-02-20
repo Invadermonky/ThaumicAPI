@@ -1,4 +1,4 @@
-package com.invadermonky.thaumicapi.warpevents;
+package com.invadermonky.thaumicapi.warpevents.events;
 
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +23,9 @@ public class WarpEventSpidersReal extends WarpEventSpidersFake {
 
     @Override
     public void performWarpEvent(EntityPlayer player, int warp) {
-        int count = Math.min(50, warp);
-        this.spawnSpiders(player, count, true);
+        if(!player.world.isRemote) {
+            int count = Math.min(50, warp);
+            this.spawnSpiders(player, count, true);
+        }
     }
 }

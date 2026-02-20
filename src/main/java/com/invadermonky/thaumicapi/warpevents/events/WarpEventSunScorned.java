@@ -1,4 +1,4 @@
-package com.invadermonky.thaumicapi.warpevents;
+package com.invadermonky.thaumicapi.warpevents.events;
 
 import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
@@ -41,8 +41,10 @@ public class WarpEventSunScorned implements IWarpEvent {
 
     @Override
     public void performWarpEvent(EntityPlayer player, int warp) {
-        PotionEffect effect = new PotionEffect(PotionSunScorned.instance, 5000, Math.min(3, warp / 15), true, true);
-        effect.getCurativeItems().clear();
-        player.addPotionEffect(effect);
+        if(!player.world.isRemote) {
+            PotionEffect effect = new PotionEffect(PotionSunScorned.instance, 5000, Math.min(3, warp / 15), true, true);
+            effect.getCurativeItems().clear();
+            player.addPotionEffect(effect);
+        }
     }
 }

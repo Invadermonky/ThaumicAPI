@@ -1,4 +1,4 @@
-package com.invadermonky.thaumicapi.warpevents;
+package com.invadermonky.thaumicapi.warpevents.events;
 
 import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
@@ -45,8 +45,10 @@ public class WarpEventSpawnMist implements IWarpEvent {
 
     @Override
     public void performWarpEvent(EntityPlayer player, int warp) {
-        PacketHandler.INSTANCE.sendTo(new PacketMiscEvent((byte)1), (EntityPlayerMP)player);
-        this.spawnGuardians(player, 1);
+        if(!player.world.isRemote) {
+            PacketHandler.INSTANCE.sendTo(new PacketMiscEvent((byte) 1), (EntityPlayerMP) player);
+            this.spawnGuardians(player, 1);
+        }
     }
 
     protected void spawnGuardians(EntityPlayer player, int count) {
