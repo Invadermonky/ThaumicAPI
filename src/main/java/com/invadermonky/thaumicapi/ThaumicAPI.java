@@ -1,6 +1,6 @@
 package com.invadermonky.thaumicapi;
 
-import com.invadermonky.thaumicapi.registry.WarpEventRegistry;
+import com.invadermonky.thaumicapi.warpevents.WarpEventRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;

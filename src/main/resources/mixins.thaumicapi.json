@@ -1,17 +1,18 @@
 {
-	"package": "com.invadermonky.thaumicapi.mixins" ,
-	"required": true ,
-	"refmap": "mixins.thaumicapi.refmap.json" ,
-	"target": "@env(DEFAULT)" ,
-	"minVersion": "0.8.5" ,
-	"minMixinExtrasVersion": "0.5.0-beta.4" ,
-	"compatibilityLevel": "JAVA_8" ,
-	"mixins": [
-		"block.BlockSmelterAuxMixin" ,
-		"block.BlockSmelterVentMixin" ,
-		"tile.TileAlembicAccessor" ,
-		"tile.TileSmelterMixin"
-	] ,
-	"server": [] ,
-	"client": []
+  "package": "com.invadermonky.thaumicapi.mixins" ,
+  "required": true ,
+  "refmap": "mixins.thaumicapi.refmap.json" ,
+  "target": "@env(DEFAULT)" ,
+  "minVersion": "0.8.5" ,
+  "minMixinExtrasVersion": "0.5.0-beta.4" ,
+  "compatibilityLevel": "JAVA_8" ,
+  "mixins": [
+    "block.BlockSmelterAuxMixin" ,
+    "block.BlockSmelterVentMixin" ,
+    "events.WarpEventsMixin" ,
+    "tile.TileAlembicAccessor" ,
+    "tile.TileSmelterMixin"
+  ] ,
+  "server": [] ,
+  "client": []
 }

@@ -1,4 +1,4 @@
-package com.invadermonky.thaumicapi.registry;
+package com.invadermonky.thaumicapi.warpevents;
 
 import com.invadermonky.thaumicapi.ThaumicAPI;
 import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
@@ -17,15 +17,15 @@ public class WarpEventRegistry {
     public static final Map<String,IWarpEvent> WARP_EVENTS = new HashMap<>();
 
     @Nullable
-    public static IWarpEvent getWarpEvent(World world, int warp) {
+    public static IWarpEvent getWarpEvent(World world, int eventWarp) {
         List<IWarpEvent> potentialEvents = new ArrayList<>();
-        while(warp >= 0 && potentialEvents.isEmpty()) {
+        while(eventWarp >= 0 && potentialEvents.isEmpty()) {
             for (IWarpEvent event : WARP_EVENTS.values()) {
-                if (event.getMinimumWarp() > warp && event.getMaximumWarp() <= warp) {
+                if (event.getMinimumWarp() > eventWarp && event.getMaximumWarp() <= eventWarp) {
                     potentialEvents.add(event);
                 }
             }
-            warp--;
+            eventWarp--;
         }
         return !potentialEvents.isEmpty() ? potentialEvents.get(world.rand.nextInt(potentialEvents.size())) : null;
     }

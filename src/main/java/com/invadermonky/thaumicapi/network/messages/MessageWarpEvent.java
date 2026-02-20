@@ -1,7 +1,7 @@
 package com.invadermonky.thaumicapi.network.messages;
 
 import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
-import com.invadermonky.thaumicapi.registry.WarpEventRegistry;
+import com.invadermonky.thaumicapi.warpevents.WarpEventRegistry;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;

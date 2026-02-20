@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @WarpEvent
-public class WarpEventsMiningFatigue implements IWarpEvent {
+public class WarpEventMiningFatigue implements IWarpEvent {
     @Override
     public @NotNull String getEventName() {
         return "thaumcraft.mining_fatigue";
