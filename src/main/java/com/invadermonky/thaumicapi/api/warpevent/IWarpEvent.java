@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public interface IWarpEvent {
+    /** The unique name identifier of this warp event. */
     @Nonnull
     String getEventName();
 
