@@ -18,15 +18,20 @@ public interface IWarpEvent {
     /** The maximum amount of warp allowed for this event to occur. This value is inclusive. */
     int getMaximumWarp();
 
-    /** Play the warp event sound. This should fire clientside only whenever possible. */
+    /** Play the warp event sound. This method is only fired client-side. */
     void playClientEventSound(EntityPlayer player, int warp);
 
     /** The warp event message. */
     @Nullable
     ITextComponent getEventMessage(EntityPlayer player, int warp);
 
-
+    /** Runs the warp event. This method will fire server-side first, then client-side. */
     void performWarpEvent(EntityPlayer player, int warp);
+
+    /** Checks if this event should fire. This method only fires server-side */
+    default boolean shouldEventProcess(EntityPlayer player) {
+        return true;
+    }
 
     /** Whether this event will be disabled by the {@link CONFIG_GRAPHICS#nostress} setting. */
     default boolean isStressful() {

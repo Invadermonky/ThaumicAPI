@@ -42,7 +42,7 @@ public class WarpEventHandler {
             warpCapability.setCounter(warpCounter);
             int eventWarp = player.world.rand.nextInt(playerWarp) + gearWarp - PlayerHelper.getWarpProtectionFromGear(player);
 
-            IWarpEvent warpEvent = WarpEventRegistry.getWarpEvent(player.world, eventWarp);
+            IWarpEvent warpEvent = WarpEventRegistry.getWarpEvent(player, eventWarp);
             if(warpEvent != null) {
                 performWarpEvent(player, totalWarp, warpEvent);
             }

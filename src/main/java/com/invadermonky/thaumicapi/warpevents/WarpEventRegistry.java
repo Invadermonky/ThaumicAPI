@@ -3,7 +3,7 @@ package com.invadermonky.thaumicapi.warpevents;
 import com.invadermonky.thaumicapi.ThaumicAPI;
 import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
-import net.minecraft.world.World;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 
@@ -17,17 +17,17 @@ public class WarpEventRegistry {
     public static final Map<String,IWarpEvent> WARP_EVENTS = new HashMap<>();
 
     @Nullable
-    public static IWarpEvent getWarpEvent(World world, int eventWarp) {
+    public static IWarpEvent getWarpEvent(EntityPlayer player, int eventWarp) {
         List<IWarpEvent> potentialEvents = new ArrayList<>();
         while(eventWarp >= 0 && potentialEvents.isEmpty()) {
             for (IWarpEvent event : WARP_EVENTS.values()) {
-                if (event.getMinimumWarp() > eventWarp && event.getMaximumWarp() <= eventWarp) {
+                if (event.getMinimumWarp() > eventWarp && event.getMaximumWarp() <= eventWarp && event.shouldEventProcess(player)) {
                     potentialEvents.add(event);
                 }
             }
             eventWarp--;
         }
-        return !potentialEvents.isEmpty() ? potentialEvents.get(world.rand.nextInt(potentialEvents.size())) : null;
+        return !potentialEvents.isEmpty() ? potentialEvents.get(player.world.rand.nextInt(potentialEvents.size())) : null;
     }
 
     @Nullable
