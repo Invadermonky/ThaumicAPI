@@ -1,6 +1,6 @@
 package com.invadermonky.thaumicapi.api.item;
 
-import com.invadermonky.thaumicapi.ThaumicAPI;
+import com.invadermonky.thaumicapi.ThaumicAPIMod;
 import com.invadermonky.thaumicapi.network.NetworkHandlerTAPI;
 import com.invadermonky.thaumicapi.network.messages.MessageAuraToClient;
 import com.invadermonky.thaumicapi.utils.helpers.PlayerHelper;
@@ -120,7 +120,7 @@ public abstract class AbstractItemCaster extends Item implements IArchitect, ICa
      */
     public AbstractItemCaster(boolean isAugmentable) {
         this.setMaxStackSize(1);
-        this.addPropertyOverride(new ResourceLocation(ThaumicAPI.MOD_ID, "focus"), (stack, worldIn, entityIn) -> this.hasFocusStack(stack) ? 1.0f : 0);
+        this.addPropertyOverride(new ResourceLocation(ThaumicAPIMod.MOD_ID, "focus"), (stack, worldIn, entityIn) -> this.hasFocusStack(stack) ? 1.0f : 0);
         this.isAugmentable = isAugmentable;
     }
 
@@ -616,7 +616,7 @@ public abstract class AbstractItemCaster extends Item implements IArchitect, ICa
             cooldown = CasterManager.class.getDeclaredMethod("isOnCooldown", EntityLivingBase.class);
             cooldown.setAccessible(true);
         } catch (Exception ex) {
-            ThaumicAPI.LOGGER.error("Failed to access Thaumcraft's CasterManager#isOnCooldown");
+            ThaumicAPIMod.LOGGER.error("Failed to access Thaumcraft's CasterManager#isOnCooldown");
             throw new RuntimeException(ex);
         }
 

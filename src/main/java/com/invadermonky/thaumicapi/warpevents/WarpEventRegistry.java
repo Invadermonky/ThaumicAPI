@@ -1,6 +1,6 @@
 package com.invadermonky.thaumicapi.warpevents;
 
-import com.invadermonky.thaumicapi.ThaumicAPI;
+import com.invadermonky.thaumicapi.ThaumicAPIMod;
 import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,7 +38,7 @@ public class WarpEventRegistry {
     public static void registerWarpEvent(IWarpEvent event) {
         if(event != null && event.isEnabled()) {
             if(WARP_EVENTS.containsKey(event.getEventName())) {
-                ThaumicAPI.LOGGER.warn("Warp Event {} is being overwritten by {}", WARP_EVENTS.get(event.getEventName()).getClass(), event.getClass());
+                ThaumicAPIMod.LOGGER.warn("Warp Event {} is being overwritten by {}", WARP_EVENTS.get(event.getEventName()).getClass(), event.getClass());
             }
             WARP_EVENTS.put(event.getEventName(), event);
         }
@@ -58,7 +58,7 @@ public class WarpEventRegistry {
                     throw new ClassCastException("WarpEvent class " + found.getClassName() + " does not inherit from IWarpEvent.");
                 }
             } catch (Exception e) {
-                ThaumicAPI.LOGGER.error("Error registering Warp Event {}", found.getClassName(), e);
+                ThaumicAPIMod.LOGGER.error("Error registering Warp Event {}", found.getClassName(), e);
             }
         }
     }

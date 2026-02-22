@@ -10,13 +10,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(
-        modid = ThaumicAPI.MOD_ID,
-        name = ThaumicAPI.MOD_NAME,
-        version = ThaumicAPI.MOD_VERSION,
-        acceptedMinecraftVersions = ThaumicAPI.MC_VERSION,
-        dependencies = ThaumicAPI.DEPENDENCIES
+        modid = ThaumicAPIMod.MOD_ID,
+        name = ThaumicAPIMod.MOD_NAME,
+        version = ThaumicAPIMod.MOD_VERSION,
+        acceptedMinecraftVersions = ThaumicAPIMod.MC_VERSION,
+        dependencies = ThaumicAPIMod.DEPENDENCIES
 )
-public class ThaumicAPI {
+public class ThaumicAPIMod {
     public static final String MOD_ID = Tags.MOD_ID;
     public static final String MOD_NAME = Tags.MOD_NAME;
     public static final String MOD_VERSION = Tags.VERSION;
