@@ -26,8 +26,8 @@ public class WarpEventCrimsonPortal implements IWarpEvent {
     }
 
     @Override
-    public int getMaximumWarp() {
-        return 88;
+    public int getEventWeight() {
+        return 4;
     }
 
     @Override

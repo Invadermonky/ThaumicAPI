@@ -29,8 +29,8 @@ public class WarpEventSpawnMist implements IWarpEvent {
     }
 
     @Override
-    public int getMaximumWarp() {
-        return 32;
+    public int getEventWeight() {
+        return 4;
     }
 
     @Override

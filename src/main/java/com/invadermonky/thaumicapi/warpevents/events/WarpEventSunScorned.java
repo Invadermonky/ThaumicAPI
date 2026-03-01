@@ -25,8 +25,8 @@ public class WarpEventSunScorned implements IWarpEvent {
     }
 
     @Override
-    public int getMaximumWarp() {
-        return 40;
+    public int getEventWeight() {
+        return 4;
     }
 
     @Override

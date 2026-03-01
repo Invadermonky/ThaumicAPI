@@ -23,8 +23,8 @@ public class WarpEventParanoia implements IWarpEvent {
     }
 
     @Override
-    public int getMaximumWarp() {
-        return 12;
+    public int getEventWeight() {
+        return 4;
     }
 
     @Override

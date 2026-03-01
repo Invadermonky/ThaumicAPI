@@ -23,8 +23,8 @@ public class WarpEventBlindness implements IWarpEvent {
     }
 
     @Override
-    public int getMaximumWarp() {
-        return 72;
+    public int getEventWeight() {
+        return 4;
     }
 
     @Override

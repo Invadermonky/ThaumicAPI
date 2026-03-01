@@ -20,11 +20,6 @@ public class WarpEventSpawnMistMax extends WarpEventSpawnMist {
     }
 
     @Override
-    public int getMaximumWarp() {
-        return Integer.MAX_VALUE;
-    }
-
-    @Override
     public void performWarpEvent(EntityPlayer player, int warp) {
         if(!player.world.isRemote) {
             PacketHandler.INSTANCE.sendTo(new PacketMiscEvent((byte) 1), (EntityPlayerMP) player);

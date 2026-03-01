@@ -25,8 +25,8 @@ public class WarpEventDeathGaze implements IWarpEvent {
     }
 
     @Override
-    public int getMaximumWarp() {
-        return 56;
+    public int getEventWeight() {
+        return 4;
     }
 
     @Override

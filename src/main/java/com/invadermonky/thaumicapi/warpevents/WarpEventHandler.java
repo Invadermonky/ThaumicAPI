@@ -2,6 +2,7 @@ package com.invadermonky.thaumicapi.warpevents;
 
 import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
 import com.invadermonky.thaumicapi.events.PlayerWarpEvent;
+import com.invadermonky.thaumicapi.network.NetworkHandlerTAPI;
 import com.invadermonky.thaumicapi.network.messages.MessageWarpEvent;
 import com.invadermonky.thaumicapi.utils.helpers.PlayerHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,7 +15,6 @@ import net.minecraftforge.common.MinecraftForge;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.capabilities.IPlayerWarp;
 import thaumcraft.api.capabilities.ThaumcraftCapabilities;
-import thaumcraft.common.lib.network.PacketHandler;
 
 public class WarpEventHandler {
 
@@ -37,14 +37,16 @@ public class WarpEventHandler {
         int actualWarp = norm + perm;
 
         int warpCounter = warpCapability.getCounter();
-        if(warpCounter > 0 && totalWarp > 0 && (double) player.world.rand.nextInt(100) <= Math.sqrt(warpCounter)) {
+        if (warpCounter > 0 && totalWarp > 0 && (double) player.world.rand.nextInt(100) <= Math.sqrt(warpCounter)) {
             warpCounter = (int) (warpCounter - Math.max(5.0, Math.sqrt(warpCounter) * 2.0 - (gearWarp * 2)));
             warpCapability.setCounter(warpCounter);
-            int eventWarp = player.world.rand.nextInt(playerWarp) + gearWarp - PlayerHelper.getWarpProtectionFromGear(player);
+            if(player.world.rand.nextInt(playerWarp) > 0) {
+                int eventWarp = playerWarp + gearWarp - PlayerHelper.getWarpProtectionFromGear(player);
 
-            IWarpEvent warpEvent = WarpEventRegistry.getWarpEvent(player, eventWarp);
-            if(warpEvent != null) {
-                performWarpEvent(player, totalWarp, warpEvent);
+                IWarpEvent warpEvent = WarpEventRegistry.getWarpEvent(player, eventWarp);
+                if (warpEvent != null) {
+                    performWarpEvent(player, totalWarp, warpEvent);
+                }
             }
             checkWarpResearch(player, actualWarp);
         }
@@ -65,7 +67,7 @@ public class WarpEventHandler {
             }
             //Perform the event client-side
             if (player instanceof EntityPlayerMP) {
-                PacketHandler.INSTANCE.sendTo(new MessageWarpEvent(event.getWarpEvent(), totalWarp), (EntityPlayerMP) player);
+                NetworkHandlerTAPI.INSTANCE.sendTo(new MessageWarpEvent(event.getWarpEvent(), totalWarp), (EntityPlayerMP) player);
             }
             //Post the post-event event
             MinecraftForge.EVENT_BUS.post(new PlayerWarpEvent.Post(player, totalWarp, event.getWarpEvent()));

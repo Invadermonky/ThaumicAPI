@@ -22,8 +22,8 @@ public class WarpEventBlurredVision implements IWarpEvent {
     }
 
     @Override
-    public int getMaximumWarp() {
-        return 36;
+    public int getEventWeight() {
+        return 4;
     }
 
     @Override

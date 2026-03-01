@@ -17,17 +17,30 @@ public class WarpEventRegistry {
     public static final Map<String,IWarpEvent> WARP_EVENTS = new HashMap<>();
 
     @Nullable
-    public static IWarpEvent getWarpEvent(EntityPlayer player, int eventWarp) {
+    public static IWarpEvent getWarpEvent(EntityPlayer player, int playerWarp) {
         List<IWarpEvent> potentialEvents = new ArrayList<>();
-        while(eventWarp >= 0 && potentialEvents.isEmpty()) {
+        int eventWeight = 0;
+        while(playerWarp >= 0 && potentialEvents.isEmpty()) {
             for (IWarpEvent event : WARP_EVENTS.values()) {
-                if (event.getMinimumWarp() > eventWarp && event.getMaximumWarp() <= eventWarp && event.shouldEventProcess(player)) {
+                if (playerWarp > event.getMinimumWarp() && playerWarp <= event.getMaximumWarp() && event.shouldEventProcess(player)) {
                     potentialEvents.add(event);
+                    eventWeight += event.getEventWeight();
                 }
             }
-            eventWarp--;
+            playerWarp--;
         }
-        return !potentialEvents.isEmpty() ? potentialEvents.get(player.world.rand.nextInt(potentialEvents.size())) : null;
+
+        if(!potentialEvents.isEmpty() && eventWeight > 0) {
+            int weight = player.world.rand.nextInt(eventWeight);
+            for (IWarpEvent event : potentialEvents) {
+                if (weight < event.getEventWeight()) {
+                    return event;
+                }
+                weight -= event.getEventWeight();
+            }
+        }
+
+        return !potentialEvents.isEmpty() ? potentialEvents.get(0) : null;
     }
 
     @Nullable

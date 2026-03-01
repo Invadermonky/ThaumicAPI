@@ -22,11 +22,6 @@ public class WarpEventUnnaturalHungerGreater extends WarpEventUnnaturalHunger {
     }
 
     @Override
-    public int getMaximumWarp() {
-        return 80;
-    }
-
-    @Override
     public void performWarpEvent(EntityPlayer player, int warp) {
         if(!player.world.isRemote) {
             PotionEffect effect = new PotionEffect(PotionUnnaturalHunger.instance, 6000, Math.min(3, warp / 15), true, true);

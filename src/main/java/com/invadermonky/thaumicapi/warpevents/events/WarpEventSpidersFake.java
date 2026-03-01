@@ -26,8 +26,8 @@ public class WarpEventSpidersFake implements IWarpEvent {
     }
 
     @Override
-    public int getMaximumWarp() {
-        return 60;
+    public int getEventWeight() {
+        return 4;
     }
 
     @Override

@@ -23,7 +23,7 @@ public class WarpEventCreeperPrimed implements IWarpEvent {
     }
 
     @Override
-    public int getMaximumWarp() {
+    public int getEventWeight() {
         return 4;
     }
 

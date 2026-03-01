@@ -16,7 +16,11 @@ public interface IWarpEvent {
     int getMinimumWarp();
 
     /** The maximum amount of warp allowed for this event to occur. This value is inclusive. */
-    int getMaximumWarp();
+    default int getMaximumWarp() {
+        return Integer.MAX_VALUE;
+    }
+
+    int getEventWeight();
 
     /** Play the warp event sound. This method is only fired client-side. */
     void playClientEventSound(EntityPlayer player, int warp);

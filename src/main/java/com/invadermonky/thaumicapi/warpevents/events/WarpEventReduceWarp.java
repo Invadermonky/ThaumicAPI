@@ -26,8 +26,8 @@ public class WarpEventReduceWarp implements IWarpEvent {
     }
 
     @Override
-    public int getMaximumWarp() {
-        return 76;
+    public int getEventWeight() {
+        return 4;
     }
 
     @Override

@@ -25,8 +25,8 @@ public class WarpEventThaumarhia implements IWarpEvent {
     }
 
     @Override
-    public int getMaximumWarp() {
-        return 20;
+    public int getEventWeight() {
+        return 4;
     }
 
     @Override

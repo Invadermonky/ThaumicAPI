@@ -17,11 +17,6 @@ public class WarpEventSpidersReal extends WarpEventSpidersFake {
     }
 
     @Override
-    public int getMaximumWarp() {
-        return 92;
-    }
-
-    @Override
     public void performWarpEvent(EntityPlayer player, int warp) {
         if(!player.world.isRemote) {
             int count = Math.min(50, warp);

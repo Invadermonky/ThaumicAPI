@@ -25,8 +25,8 @@ public class WarpEventVisExhaust implements IWarpEvent {
     }
 
     @Override
-    public int getMaximumWarp() {
-        return 16;
+    public int getEventWeight() {
+        return 4;
     }
 
     @Override
