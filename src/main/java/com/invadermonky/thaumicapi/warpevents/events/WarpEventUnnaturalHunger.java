@@ -6,20 +6,22 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import thaumcraft.Thaumcraft;
 import thaumcraft.api.items.ItemsTC;
 import thaumcraft.common.lib.potions.PotionUnnaturalHunger;
 
 @WarpEvent
 public class WarpEventUnnaturalHunger implements IWarpEvent {
     @Override
-    public @NotNull String getEventName() {
-        return "thaumcraft.unnatural_hunger";
+    public @NotNull ResourceLocation getEventName() {
+        return new ResourceLocation(Thaumcraft.MODID, "unnatural_hunger");
     }
 
     @Override
@@ -29,7 +31,7 @@ public class WarpEventUnnaturalHunger implements IWarpEvent {
 
     @Override
     public int getEventWeight() {
-        return 4;
+        return 10;
     }
 
     @Override

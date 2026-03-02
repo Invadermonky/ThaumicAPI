@@ -5,15 +5,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
+import thaumcraft.Thaumcraft;
 import thaumcraft.api.items.ItemsTC;
 import thaumcraft.common.lib.potions.PotionUnnaturalHunger;
 
 @WarpEvent
 public class WarpEventUnnaturalHungerGreater extends WarpEventUnnaturalHunger {
     @Override
-    public @NotNull String getEventName() {
-        return "thaumcraft.unnatural_hunger_greater";
+    public @NotNull ResourceLocation getEventName() {
+        return new ResourceLocation(Thaumcraft.MODID, "unnatural_hunger_greater");
     }
 
     @Override

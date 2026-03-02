@@ -19,7 +19,7 @@ public class PlayerWarpEvent extends PlayerEvent {
     }
 
     public String getWarpEventName() {
-        return this.warpEvent.getEventName();
+        return this.warpEvent.getEventName().toString();
     }
 
     public int getPlayerWarp() {

@@ -10,6 +10,7 @@ import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import thaumcraft.api.capabilities.IPlayerWarp;
@@ -18,6 +19,7 @@ import thaumcraft.api.capabilities.ThaumcraftCapabilities;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SubCommandWarpEvent implements ISubCommand {
     @Override
@@ -40,7 +42,8 @@ public class SubCommandWarpEvent implements ISubCommand {
         if(args.length == 2) {
             return new ArrayList<>(CommandBase.getListOfStringsMatchingLastWord(args, server.getOnlinePlayerNames()));
         } else if(args.length == 3) {
-            return new ArrayList<>(CommandBase.getListOfStringsMatchingLastWord(args, WarpEventRegistry.WARP_EVENTS.keySet()));
+            List<String> eventNames = WarpEventRegistry.WARP_EVENTS.keySet().stream().map(ResourceLocation::toString).collect(Collectors.toList());
+            return new ArrayList<>(CommandBase.getListOfStringsMatchingLastWord(args, eventNames));
         } else if(args.length == 4) {
             try {
                 EntityPlayer player = CommandBase.getPlayer(server, sender, args[1]);

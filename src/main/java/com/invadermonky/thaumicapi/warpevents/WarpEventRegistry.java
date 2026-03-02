@@ -4,6 +4,7 @@ import com.invadermonky.thaumicapi.ThaumicAPIMod;
 import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public class WarpEventRegistry {
-    public static final Map<String,IWarpEvent> WARP_EVENTS = new HashMap<>();
+    public static final Map<ResourceLocation,IWarpEvent> WARP_EVENTS = new HashMap<>();
 
     @Nullable
     public static IWarpEvent getWarpEvent(EntityPlayer player, int playerWarp) {
@@ -45,7 +46,8 @@ public class WarpEventRegistry {
 
     @Nullable
     public static IWarpEvent getWarpEvent(String eventName) {
-        return WARP_EVENTS.get(eventName);
+        ResourceLocation loc = new ResourceLocation(eventName);
+        return WARP_EVENTS.get(loc);
     }
 
     public static void registerWarpEvent(IWarpEvent event) {

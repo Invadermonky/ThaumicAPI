@@ -3,15 +3,17 @@ package com.invadermonky.thaumicapi.warpevents.events;
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
+import thaumcraft.Thaumcraft;
 import thaumcraft.common.lib.network.PacketHandler;
 import thaumcraft.common.lib.network.misc.PacketMiscEvent;
 
 @WarpEvent
 public class WarpEventSpawnMistMax extends WarpEventSpawnMist {
     @Override
-    public @NotNull String getEventName() {
-        return "thaumcraft.spawn_mist_max";
+    public @NotNull ResourceLocation getEventName() {
+        return new ResourceLocation(Thaumcraft.MODID, "spawn_mist_max");
     }
 
     @Override

@@ -2,13 +2,15 @@ package com.invadermonky.thaumicapi.warpevents.events;
 
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
+import thaumcraft.Thaumcraft;
 
 @WarpEvent
 public class WarpEventSpidersReal extends WarpEventSpidersFake {
     @Override
-    public @NotNull String getEventName() {
-        return "thaumcraft.spiders_real";
+    public @NotNull ResourceLocation getEventName() {
+        return new ResourceLocation(Thaumcraft.MODID, "spiders_real");
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
@@ -12,6 +13,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import thaumcraft.Thaumcraft;
 import thaumcraft.common.entities.monster.EntityEldritchGuardian;
 import thaumcraft.common.lib.network.PacketHandler;
 import thaumcraft.common.lib.network.misc.PacketMiscEvent;
@@ -19,8 +21,8 @@ import thaumcraft.common.lib.network.misc.PacketMiscEvent;
 @WarpEvent
 public class WarpEventSpawnMist implements IWarpEvent {
     @Override
-    public @NotNull String getEventName() {
-        return "thaumcraft.spawn_mist";
+    public @NotNull ResourceLocation getEventName() {
+        return new ResourceLocation(Thaumcraft.MODID, "spawn_mist");
     }
 
     @Override
@@ -30,7 +32,7 @@ public class WarpEventSpawnMist implements IWarpEvent {
 
     @Override
     public int getEventWeight() {
-        return 4;
+        return 10;
     }
 
     @Override

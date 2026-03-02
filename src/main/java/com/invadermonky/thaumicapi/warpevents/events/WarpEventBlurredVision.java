@@ -4,16 +4,18 @@ import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import thaumcraft.Thaumcraft;
 import thaumcraft.common.lib.potions.PotionBlurredVision;
 
 @WarpEvent
 public class WarpEventBlurredVision implements IWarpEvent {
     @Override
-    public @NotNull String getEventName() {
-        return "thaumcraft.blurred_vision";
+    public @NotNull ResourceLocation getEventName() {
+        return new ResourceLocation(Thaumcraft.MODID, "blurred_vision");
     }
 
     @Override
@@ -23,7 +25,7 @@ public class WarpEventBlurredVision implements IWarpEvent {
 
     @Override
     public int getEventWeight() {
-        return 4;
+        return 10;
     }
 
     @Override

@@ -4,17 +4,19 @@ import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.ITextComponent;
 import org.jetbrains.annotations.NotNull;
+import thaumcraft.Thaumcraft;
 
 import javax.annotation.Nullable;
 
 @WarpEvent
 public class WarpEventCreeperPrimed implements IWarpEvent {
     @Override
-    public @NotNull String getEventName() {
-        return "thaumcraft.creeper_primed";
+    public @NotNull ResourceLocation getEventName() {
+        return new ResourceLocation(Thaumcraft.MODID, "creeper_primed");
     }
 
     @Override
@@ -24,7 +26,7 @@ public class WarpEventCreeperPrimed implements IWarpEvent {
 
     @Override
     public int getEventWeight() {
-        return 4;
+        return 10;
     }
 
     @Override

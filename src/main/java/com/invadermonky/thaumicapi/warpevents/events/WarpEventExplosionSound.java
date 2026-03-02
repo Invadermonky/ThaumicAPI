@@ -4,26 +4,28 @@ import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.ITextComponent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import thaumcraft.Thaumcraft;
 
 @WarpEvent
 public class WarpEventExplosionSound implements IWarpEvent {
     @Override
-    public @NotNull String getEventName() {
-        return "thaumcraft.explosion_sound";
+    public @NotNull ResourceLocation getEventName() {
+        return new ResourceLocation(Thaumcraft.MODID, "explosion_sound");
     }
 
     @Override
     public int getMinimumWarp() {
-        return 4;
+        return 10;
     }
 
     @Override
     public int getEventWeight() {
-        return 4;
+        return 10;
     }
 
     @Override

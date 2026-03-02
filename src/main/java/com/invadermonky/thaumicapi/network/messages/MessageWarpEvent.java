@@ -33,7 +33,7 @@ public class MessageWarpEvent implements IMessage {
 
     @Override
     public void toBytes(ByteBuf buf) {
-        ByteBufUtils.writeUTF8String(buf, this.warpEvent.getEventName());
+        ByteBufUtils.writeUTF8String(buf, this.warpEvent.getEventName().toString());
         buf.writeInt(this.playerWarp);
     }
 

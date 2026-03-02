@@ -3,6 +3,7 @@ package com.invadermonky.thaumicapi.warpevents.events;
 import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
 import com.invadermonky.thaumicapi.api.warpevent.WarpEvent;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
@@ -11,13 +12,14 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import thaumcraft.Thaumcraft;
 import thaumcraft.common.entities.monster.cult.EntityCultistPortalLesser;
 
 @WarpEvent
 public class WarpEventCrimsonPortal implements IWarpEvent {
     @Override
-    public @NotNull String getEventName() {
-        return "thaumcraft.crimson_portal";
+    public @NotNull ResourceLocation getEventName() {
+        return new ResourceLocation(Thaumcraft.MODID, "crimson_portal");
     }
 
     @Override
@@ -27,7 +29,7 @@ public class WarpEventCrimsonPortal implements IWarpEvent {
 
     @Override
     public int getEventWeight() {
-        return 4;
+        return 10;
     }
 
     @Override
