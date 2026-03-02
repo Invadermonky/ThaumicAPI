@@ -4,7 +4,6 @@ import com.invadermonky.thaumicapi.api.impetus.CapabilityImpetusHandler;
 import com.invadermonky.thaumicapi.commands.CommandThaumicAPI;
 import com.invadermonky.thaumicapi.network.NetworkHandlerTAPI;
 import com.invadermonky.thaumicapi.warpevents.WarpEventRegistry;
-import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
