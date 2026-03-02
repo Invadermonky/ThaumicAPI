@@ -1,6 +1,7 @@
 package com.invadermonky.thaumicapi.api.warpevent;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import thaumcraft.common.config.ModConfig.CONFIG_GRAPHICS;
 
@@ -8,9 +9,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public interface IWarpEvent {
-    /** The unique name identifier of this warp event. */
+    /** The unique resource location identifier of this warp event. */
     @Nonnull
-    String getEventName();
+    ResourceLocation getEventName();
 
     /** The minimum amount of warp required for this event to occur. This value is exclusive. */
     int getMinimumWarp();
