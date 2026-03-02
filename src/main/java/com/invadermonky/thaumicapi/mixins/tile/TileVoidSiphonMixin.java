@@ -8,16 +8,23 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import thaumcraft.common.tiles.TileThaumcraftInventory;
 import thaumcraft.common.tiles.crafting.TileVoidSiphon;
 
-@Mixin(value = TileVoidSiphon.class, remap = false)
+@Mixin(value = TileVoidSiphon.class, priority = 1001, remap = false)
 public abstract class TileVoidSiphonMixin extends TileThaumcraftInventory implements IImpetusStorage {
     @Shadow public int progress;
     @Shadow @Final public int PROGREQ;
 
     public TileVoidSiphonMixin(int size) {
         super(size);
+    }
+
+    @ModifyConstant(method = "update", constant = @Constant(intValue = 2000), remap = true)
+    private int modifyProgressRequired(int constant) {
+        return this.getMaxImpetusStored();
     }
 
     @Override

@@ -42,4 +42,7 @@ public class ThaumicAPIMod {
     //TODO:
     //  Add unused spell cast event
     //  Add interface for infusion matrix augmentations (such as infusion cost or speed) - TileInfusionMatrix line: 802-813
+    //      - increase/reduce cycleTime
+    //      - increase/reduce costMult
+    //      - increase/reduce stabilityReplenish
 }
