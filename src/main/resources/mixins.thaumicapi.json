@@ -11,7 +11,8 @@
     "block.BlockSmelterVentMixin" ,
     "events.WarpEventsMixin" ,
     "tile.TileAlembicAccessor" ,
-    "tile.TileSmelterMixin"
+    "tile.TileSmelterMixin" ,
+    "tile.TileVoidSiphonMixin"
   ] ,
   "server": [] ,
   "client": []
