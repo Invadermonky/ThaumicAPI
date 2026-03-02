@@ -38,4 +38,8 @@ public class ThaumicAPIMod {
     public void serverStarting(FMLServerStartingEvent event) {
         event.registerServerCommand(new CommandThaumicAPI());
     }
+
+    //TODO:
+    //  Add unused spell cast event
+    //  Add interface for infusion matrix augmentations (such as infusion cost or speed) - TileInfusionMatrix line: 802-813
 }

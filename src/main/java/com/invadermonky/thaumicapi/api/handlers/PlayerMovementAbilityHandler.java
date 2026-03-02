@@ -40,7 +40,35 @@ public final class PlayerMovementAbilityHandler {
     private static WeakHashMap<EntityPlayer, LinkedList<PlayerFunctions>> players =
             new WeakHashMap<>();
 
-    private PlayerMovementAbilityHandler() {
+    /**
+     * Returns a BiFunction used to manage player movement while wearing powered boots fo the traveller.
+     * <p>
+     * Cache this value and apply it when calling the {@link PlayerMovementAbilityHandler#put(EntityPlayer, BiFunction, Predicate)}
+     * or {@link PlayerMovementAbilityHandler#remove(EntityPlayer, BiFunction, Predicate)} methods.
+     */
+    public static BiFunction<EntityPlayer, MovementType, Float> getMovementFunction(double landSpeedBoost, double waterSpeedBoost, double jumpBoost, double jumpFactor, double stepHeight) {
+        return (player, type) -> {
+            float boost = 0;
+            switch (type) {
+                case DRY_GROUND:
+                    boost = (float) landSpeedBoost;
+                    return player.isSneaking() ? boost / 4.0f : boost;
+                case WATER_GROUND:
+                    boost = (float) Math.max(landSpeedBoost / 4.0f, waterSpeedBoost);
+                    return player.isSneaking() ? boost / 4.0f : boost;
+                case WATER_SWIM:
+                    boost = (float) waterSpeedBoost;
+                    return player.isSneaking() ? boost / 4.0f : boost;
+                case JUMP_BEGIN:
+                    return (float) jumpBoost;
+                case JUMP_FACTOR:
+                    return (float) jumpFactor;
+                case STEP_HEIGHT:
+                    return !player.isSneaking() ? (float) stepHeight : 0;
+                default:
+                    return boost;
+            }
+        };
     }
 
     //Method modified to remove Thaumic Augmentation config dependency
