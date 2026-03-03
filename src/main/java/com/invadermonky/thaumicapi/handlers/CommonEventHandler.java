@@ -1,4 +1,4 @@
-package com.invadermonky.thaumicapi.api.handlers;
+package com.invadermonky.thaumicapi.handlers;
 
 import com.invadermonky.thaumicapi.ThaumicAPIMod;
 import net.minecraft.entity.player.EntityPlayer;

@@ -18,7 +18,7 @@
  * along with Thaumic Augmentation.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.invadermonky.thaumicapi.api.handlers;
+package com.invadermonky.thaumicapi.handlers;
 
 import net.minecraft.entity.player.EntityPlayer;
 
