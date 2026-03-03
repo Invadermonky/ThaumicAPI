@@ -2,6 +2,7 @@ package com.invadermonky.thaumicapi.mixins.tile;
 
 import com.invadermonky.thaumicapi.api.block.ISmelterAuxiliary;
 import com.invadermonky.thaumicapi.api.block.ISmelterVent;
+import com.invadermonky.thaumicapi.utils.helpers.SmelterHelper;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
@@ -53,12 +54,7 @@ public abstract class TileSmelterMixin extends TileThaumcraftInventory {
                 BlockPos checkPos = this.pos.offset(face);
                 IBlockState checkState = this.world.getBlockState(checkPos);
                 TileEntity checkTile = this.world.getTileEntity(checkPos);
-                ISmelterVent vent = null;
-                if(checkState.getBlock() instanceof ISmelterVent) {
-                    vent = (ISmelterVent) checkState.getBlock();
-                } else if(checkTile instanceof ISmelterVent) {
-                    vent = (ISmelterVent) checkTile;
-                }
+                ISmelterVent vent = SmelterHelper.getSmelterVent(this.world, checkPos, checkState);
 
                 if(vent != null && vent.canVentSmelter(this.world, checkPos, checkState, this)) {
                     if(this.world.rand.nextFloat() < vent.getFluxFilterChance(this.world, checkPos, checkState, this)) {
@@ -89,18 +85,12 @@ public abstract class TileSmelterMixin extends TileThaumcraftInventory {
         if(smelterFacing != faceRef.get()) {
             BlockPos checkPos = this.pos.offset(faceRef.get());
             IBlockState checkState = this.world.getBlockState(checkPos);
-            TileEntity checkTile = this.world.getTileEntity(checkPos);
-            ISmelterAuxiliary aux = null;
-            if(checkState.getBlock() instanceof ISmelterAuxiliary) {
-                aux = (ISmelterAuxiliary) checkState.getBlock();
-            } else if(checkTile instanceof ISmelterAuxiliary) {
-                aux = (ISmelterAuxiliary) checkTile;
-            }
+            ISmelterAuxiliary aux = SmelterHelper.getSmelterAuxiliary(this.world, checkPos, checkState);
 
             if(aux != null && aux.canBoostSmelter(this.world, checkPos, checkState, this)) {
                 for(int i = 0; i < aux.getBonusOperations(this.world, checkPos, checkState, this); i++) {
                     for(Aspect aspect : this.aspects.getAspects()) {
-                        if (this.aspects.getAmount(aspect) > 0 && TileAlembicAccessor.invokeProcessAlembics(this.getWorld(), this.getPos().offset(faceRef.get()), aspect)) {
+                        if (this.aspects.getAmount(aspect) > 0 && SmelterHelper.processAlembics(this.world, this.getPos().offset(faceRef.get()), aspect)) {
                             this.takeFromContainer(aspect, 1);
                             break;
                         }
