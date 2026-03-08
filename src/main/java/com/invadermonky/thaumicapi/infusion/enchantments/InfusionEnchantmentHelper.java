@@ -12,7 +12,7 @@ public class InfusionEnchantmentHelper {
         Preconditions.checkArgument(maxLevel > 0, "Infusion Enchantment maximum level must be greater than 0.");
         Preconditions.checkArgument(slotTypes.length > 0, "Infusion Enchantment slot type cannot be empty.");
         return EnumHelper.addEnum(EnumInfusionEnchantment.class, name.toUpperCase(), new Class[]{Set.class, int.class, String.class},
-                ImmutableSet.of(slotTypes), maxLevel, requiredResearch
+                ImmutableSet.copyOf(slotTypes), maxLevel, requiredResearch
         );
     }
 }
