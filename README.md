@@ -5,3 +5,4 @@
 - Adds `PlayerMovementAbilityHandler` for easier Boots of the Traveler implementations.
 - Adds `IImpetusStorage` capability for impetus (rift energy) capability usage.
 - Adds warp event command.
+- Smelter Auxiliary Pump and Vent can now be placed on any block with a solid side.

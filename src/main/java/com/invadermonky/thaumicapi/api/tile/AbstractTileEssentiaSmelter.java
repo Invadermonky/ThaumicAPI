@@ -28,8 +28,8 @@ import thaumcraft.common.lib.crafting.ThaumcraftCraftingManager;
 import thaumcraft.common.tiles.devices.TileBellows;
 import thaumcraft.common.tiles.essentia.TileSmelter;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public abstract class AbstractTileEssentiaSmelter extends TileEntity implements ITickable {
     public ItemStackHandler handler = new ItemStackHandler(2) {
@@ -118,6 +118,11 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
      */
     public abstract EnumFacing getMachineFront();
 
+    /**
+     * Sets the smelter to active, changing any required block states.
+     */
+    public abstract void setBlockActive(boolean isActive);
+
     @Override
     public void readFromNBT(@NotNull NBTTagCompound compound) {
         super.readFromNBT(compound);
@@ -150,6 +155,7 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
             did |= this.handleItemSmelting();
             did |= this.handleFuel();
             did |= this.handleEssentiaTransfer();
+            this.setBlockActive(this.burnTime > 0);
         }
         if(did) {
             this.markDirty();
@@ -229,7 +235,7 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
         if (!smeltingStack.isEmpty()) {
             AspectList aspectList = ThaumcraftCraftingManager.getObjectTags(smeltingStack);
             if(aspectList != null && aspectList.size() > 0) {
-                return aspectList.visSize() > this.getMaxEssentiaCapacity() - this.getCurrentEssentiaTotal();
+                return aspectList.visSize() <= this.getMaxEssentiaCapacity() - this.getCurrentEssentiaTotal();
             }
         }
         return false;
@@ -242,9 +248,13 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
             AspectList aspectList = ThaumcraftCraftingManager.getObjectTags(stack);
             if(aspectList != null && aspectList.size() > 0) {
                 for(Aspect aspect : aspectList.getAspects()) {
+                    float efficiency = this.getAspectEfficiency(aspect);
                     int max = aspectList.getAmount(aspect);
-                    int gained = (int) (max * getAspectEfficiency(aspect));
+                    int gained = (int) (max * efficiency);
                     if(gained < max) {
+                        if(this.world.rand.nextFloat() <= efficiency) {
+                            gained++;
+                        }
                         flux += max - gained;
                     }
                     this.aspects.add(aspect, gained);
@@ -281,6 +291,8 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
                     } else {
                         burnTime = 0;
                     }
+                } else {
+                    this.fuelHandler.extractItem(0, 1, false);
                 }
                 this.setBurnTime(burnTime);
                 return;
@@ -313,9 +325,10 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
 
     public float getBellowsModifier() {
         //TODO: Change this to a method that uses the IBellows interface.
-        List<EnumFacing> directions = Arrays.asList(EnumFacing.HORIZONTALS);
-        directions.remove(this.getMachineFront());
-        int bellows = TileBellows.getBellows(this.world, this.pos, directions.toArray(new EnumFacing[0]));
+        EnumFacing front = this.getMachineFront();
+        int bellows = TileBellows.getBellows(this.world, this.pos, Arrays.stream(EnumFacing.HORIZONTALS)
+                .filter(facing -> facing != front)
+                .toArray(EnumFacing[]::new));
         return (float) Math.max(0.1, 1.0 - (0.125 * bellows));
     }
 
