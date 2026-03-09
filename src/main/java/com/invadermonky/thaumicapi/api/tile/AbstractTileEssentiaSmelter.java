@@ -67,7 +67,7 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
     public int burnTime;
     public int burnTimeMax;
     public int progress;
-    public int maxProgress;
+    public int progressMax;
     public boolean alumentumBoost;
 
     public AbstractTileEssentiaSmelter() {
@@ -84,7 +84,7 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
     }
 
     /**
-     * The maximum amount of essentia this smelter can store. This translates to the capcity bar that appears
+     * The maximum amount of essentia this smelter can store. This translates to the capacity bar that appears
      * on the left side of the GUI. Default Thaumcraft smelters have a capacity of 256.
      */
     public abstract int getMaxEssentiaCapacity();
@@ -125,7 +125,7 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
         this.burnTime = compound.getInteger("burnTime");
         this.burnTimeMax = compound.getInteger("burnTimeMax");
         this.progress = compound.getInteger("progress");
-        this.maxProgress = compound.getInteger("maxProgress");
+        this.progressMax = compound.getInteger("maxProgress");
         this.alumentumBoost = compound.getBoolean("alumentumBoost");
         this.aspects.readFromNBT(compound);
     }
@@ -137,7 +137,7 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
         compound.setInteger("burnTime", this.burnTime);
         compound.setInteger("burnTimeMax", this.burnTimeMax);
         compound.setInteger("progress", this.progress);
-        compound.setInteger("maxProgress", this.maxProgress);
+        compound.setInteger("maxProgress", this.progressMax);
         compound.setBoolean("alumentumBoost", this.alumentumBoost);
         this.aspects.writeToNBT(compound);
         return compound;
@@ -171,12 +171,12 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
         if(this.burnTime > 0) {
             if (this.canSmeltItem()) {
                 int itemSmeltTime = this.getItemSmeltingTime();
-                if (itemSmeltTime != this.maxProgress) {
+                if (itemSmeltTime != this.progressMax) {
                     this.progress = 0;
-                    this.maxProgress = itemSmeltTime;
+                    this.progressMax = itemSmeltTime;
                 } else {
                     this.progress++;
-                    if(this.progress >= this.maxProgress) {
+                    if(this.progress >= this.progressMax) {
                         this.smeltItem();
                         this.resetProgress();
                     }
@@ -297,7 +297,7 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
     public void resetProgress() {
         this.progress = 0;
         int newMax = this.getItemSmeltingTime();
-        this.maxProgress = newMax > 0 ? newMax : 200;
+        this.progressMax = newMax > 0 ? newMax : 200;
     }
 
     public int getItemSmeltingTime() {
