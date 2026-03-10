@@ -29,7 +29,6 @@ import thaumcraft.common.tiles.devices.TileBellows;
 import thaumcraft.common.tiles.essentia.TileSmelter;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public abstract class AbstractTileEssentiaSmelter extends TileEntity implements ITickable {
     public ItemStackHandler handler = new ItemStackHandler(2) {
@@ -121,7 +120,9 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
     /**
      * Sets the smelter to active, changing any required block states.
      */
-    public abstract void setBlockActive(boolean isActive);
+    public abstract void setBlockEnabledState(boolean isActive);
+
+    public abstract int getBaseFluxProduced(int itemEssentia, int convertedEssentia);
 
     @Override
     public void readFromNBT(@NotNull NBTTagCompound compound) {
@@ -155,7 +156,7 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
             did |= this.handleItemSmelting();
             did |= this.handleFuel();
             did |= this.handleEssentiaTransfer();
-            this.setBlockActive(this.burnTime > 0);
+            this.setBlockEnabledState(this.burnTime > 0);
         }
         if(did) {
             this.markDirty();
@@ -244,23 +245,28 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
     public void smeltItem() {
         ItemStack stack = this.smeltingHandler.extractItem(0, 1, false);
         if(!stack.isEmpty()) {
-            int flux = 0;
+            int itemEssentia = 0;
+            int convertedEssentia = 0;
             AspectList aspectList = ThaumcraftCraftingManager.getObjectTags(stack);
             if(aspectList != null && aspectList.size() > 0) {
                 for(Aspect aspect : aspectList.getAspects()) {
                     float efficiency = this.getAspectEfficiency(aspect);
                     int max = aspectList.getAmount(aspect);
+                    itemEssentia += max;
                     int gained = (int) (max * efficiency);
                     if(gained < max) {
                         if(this.world.rand.nextFloat() <= efficiency) {
                             gained++;
                         }
-                        flux += max - gained;
+                        convertedEssentia += gained;
                     }
                     this.aspects.add(aspect, gained);
                 }
-                flux = this.getActualPollution(flux);
-                AuraHelper.polluteAura(this.world, this.pos, (float) flux, true);
+                int flux = this.getBaseFluxProduced(itemEssentia, convertedEssentia);
+                if(flux > 0) {
+                    flux = this.getActualPollution(flux);
+                    AuraHelper.polluteAura(this.world, this.pos, (float) flux, true);
+                }
             }
         }
     }
