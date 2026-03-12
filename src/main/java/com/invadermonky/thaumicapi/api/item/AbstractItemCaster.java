@@ -66,8 +66,7 @@ public abstract class AbstractItemCaster extends Item implements IArchitect, ICa
     public static final String TAG_BLOCK = "pickedBlock";
     protected static final DecimalFormat DECIMAL_FORMATTER = new DecimalFormat("#######.#");
     protected static final Method CASTER_IS_ON_COOLDOWN;
-
-    protected boolean isAugmentable;
+    protected int augmentSlots;
 
     /**
      * A basic builder for the gauntlet item. This constructor automatically adds the focus property override.
@@ -118,10 +117,10 @@ public abstract class AbstractItemCaster extends Item implements IArchitect, ICa
      * </pre></blockquote>
      *
      */
-    public AbstractItemCaster(boolean isAugmentable) {
+    public AbstractItemCaster(int augmentSlots) {
         this.setMaxStackSize(1);
         this.addPropertyOverride(new ResourceLocation(ThaumicAPIMod.MOD_ID, "focus"), (stack, worldIn, entityIn) -> this.hasFocusStack(stack) ? 1.0f : 0);
-        this.isAugmentable = isAugmentable;
+        this.augmentSlots = augmentSlots;
     }
 
     /**
@@ -182,8 +181,8 @@ public abstract class AbstractItemCaster extends Item implements IArchitect, ICa
 
     @Override
     public @Nullable ICapabilityProvider initCapabilities(@NotNull ItemStack stack, @Nullable NBTTagCompound nbt) {
-        if(this.isAugmentable && ModIds.thaumic_augmentation.isLoaded) {
-            SimpleCapabilityProvider<IAugmentableItem> provider = new SimpleCapabilityProvider<>(new AugmentableItem(3), CapabilityAugmentableItem.AUGMENTABLE_ITEM);
+        if(this.isAugmentable() && ModIds.thaumic_augmentation.isLoaded) {
+            SimpleCapabilityProvider<IAugmentableItem> provider = new SimpleCapabilityProvider<>(new AugmentableItem(this.augmentSlots), CapabilityAugmentableItem.AUGMENTABLE_ITEM);
             if (nbt != null && nbt.hasKey("Parent", 10)) {
                 provider.deserializeNBT(nbt.getCompoundTag("Parent"));
             }
@@ -195,7 +194,7 @@ public abstract class AbstractItemCaster extends Item implements IArchitect, ICa
     @SuppressWarnings("ConstantConditions")
     @Override
     public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> items) {
-        if(this.isAugmentable && ModIds.thaumic_augmentation.isLoaded) {
+        if(this.isAugmentable() && ModIds.thaumic_augmentation.isLoaded) {
             if (tab == this.getCreativeTab() || tab == CreativeTabs.SEARCH) {
                 ItemStack stack = new ItemStack(this);
                 if(FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT && !ThaumicAugmentation.proxy.isSingleplayer()) {
@@ -206,6 +205,10 @@ public abstract class AbstractItemCaster extends Item implements IArchitect, ICa
         } else {
             super.getSubItems(tab, items);
         }
+    }
+
+    public boolean isAugmentable() {
+        return this.augmentSlots > 0;
     }
 
     @Override
@@ -392,7 +395,7 @@ public abstract class AbstractItemCaster extends Item implements IArchitect, ICa
     @SuppressWarnings("ConstantConditions")
     @Override
     public @Nullable NBTTagCompound getNBTShareTag(@NotNull ItemStack stack) {
-        if(this.isAugmentable && ModIds.thaumic_augmentation.isLoaded) {
+        if(this.isAugmentable() && ModIds.thaumic_augmentation.isLoaded) {
             NBTTagCompound tag = new NBTTagCompound();
             if(stack.hasTagCompound()) {
                 NBTTagCompound itemTag = stack.getTagCompound().copy();
@@ -413,7 +416,7 @@ public abstract class AbstractItemCaster extends Item implements IArchitect, ICa
     @SuppressWarnings("ConstantConditions")
     @Override
     public void readNBTShareTag(@NotNull ItemStack stack, @Nullable NBTTagCompound tag) {
-        if(this.isAugmentable && ModIds.thaumic_augmentation.isLoaded) {
+        if(this.isAugmentable() && ModIds.thaumic_augmentation.isLoaded) {
             if(tag != null) {
                 if(tag.hasKey("cap", 10)) {
                     ((AugmentableItem) stack.getCapability(CapabilityAugmentableItem.AUGMENTABLE_ITEM, null)).deserializeNBT(tag.getCompoundTag("cap"));

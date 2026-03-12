@@ -28,7 +28,7 @@ import thaumcraft.common.lib.crafting.ThaumcraftCraftingManager;
 import thaumcraft.common.tiles.devices.TileBellows;
 import thaumcraft.common.tiles.essentia.TileSmelter;
 
-import java.util.*;
+import java.util.Arrays;
 
 public abstract class AbstractTileEssentiaSmelter extends TileEntity implements ITickable {
     public ItemStackHandler handler = new ItemStackHandler(2) {
@@ -102,6 +102,16 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
     public abstract float getBaseEfficiency();
 
     /**
+     * The amount of flux produced by this item smelting operation.
+     *
+     * @param itemEssentia The total item essentia amount
+     * @param convertedEssentia The amount of essentia produced
+     * @return The base amount of flux produced by the operation. This value should not include any Auxiliary
+     *         Vent reductions.
+     */
+    public abstract int getBaseFluxProduced(int itemEssentia, int convertedEssentia);
+
+    /**
      * A aspect sensitive version of {@link AbstractTileEssentiaSmelter#getBaseEfficiency()}. Used to
      * get the efficiency when converting items into their base aspects.
      */
@@ -121,8 +131,6 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
      * Sets the smelter to active, changing any required block states.
      */
     public abstract void setBlockEnabledState(boolean isActive);
-
-    public abstract int getBaseFluxProduced(int itemEssentia, int convertedEssentia);
 
     @Override
     public void readFromNBT(@NotNull NBTTagCompound compound) {
