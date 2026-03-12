@@ -376,7 +376,7 @@ public abstract class AbstractItemCaster extends Item implements IArchitect, ICa
         if(this.hasFocusStack(stack)) {
             ItemStack focusStack = this.getFocusStack(stack);
             ItemFocus focus = (ItemFocus) focusStack.getItem();
-            float visCost = focus.getVisCost(focusStack);
+            float visCost = focus.getVisCost(focusStack) * this.getConsumptionModifier(stack, Minecraft.getMinecraft().player, false);
             if(visCost > 0) {
                 tooltip.add(TextFormatting.AQUA + I18n.format("tc.vis.cost") + " " +
                         TextFormatting.RESET + DECIMAL_FORMATTER.format(visCost) + " " +
