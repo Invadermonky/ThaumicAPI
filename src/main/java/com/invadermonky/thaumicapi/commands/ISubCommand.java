@@ -1,4 +1,4 @@
-package com.invadermonky.thaumicapi.api.command;
+package com.invadermonky.thaumicapi.commands;
 
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;

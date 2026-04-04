@@ -1,7 +1,6 @@
 package com.invadermonky.thaumicapi.commands;
 
 import com.google.common.collect.Lists;
-import com.invadermonky.thaumicapi.api.command.ISubCommand;
 import com.invadermonky.thaumicapi.commands.subcommands.SubCommandWarpEvent;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;

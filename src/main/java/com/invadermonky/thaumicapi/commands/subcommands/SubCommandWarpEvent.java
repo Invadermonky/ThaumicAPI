@@ -1,6 +1,6 @@
 package com.invadermonky.thaumicapi.commands.subcommands;
 
-import com.invadermonky.thaumicapi.api.command.ISubCommand;
+import com.invadermonky.thaumicapi.commands.ISubCommand;
 import com.invadermonky.thaumicapi.api.warpevent.IWarpEvent;
 import com.invadermonky.thaumicapi.utils.helpers.PlayerHelper;
 import com.invadermonky.thaumicapi.warpevents.WarpEventHandler;
