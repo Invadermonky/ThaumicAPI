@@ -43,4 +43,5 @@ dependencies {
     implementation rfg.deobf('curse.maven:thaumic-jei-285492:2705304')
 
     implementation rfg.deobf('curse.maven:thaumic-augmentation-319441:6047659')
+    implementation rfg.deobf("curse.maven:magiculture-integrations-1064613:7445189")
 }
