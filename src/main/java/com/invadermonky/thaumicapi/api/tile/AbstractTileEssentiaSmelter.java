@@ -1,6 +1,5 @@
 package com.invadermonky.thaumicapi.api.tile;
 
-import com.invadermonky.magicultureintegrations.api.tile.IHeatableTile;
 import com.invadermonky.thaumicapi.api.block.ISmelterAuxiliary;
 import com.invadermonky.thaumicapi.api.block.ISmelterVent;
 import com.invadermonky.thaumicapi.utils.helpers.SmelterHelper;
@@ -16,7 +15,6 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RangedWrapper;
@@ -32,8 +30,7 @@ import thaumcraft.common.tiles.essentia.TileSmelter;
 
 import java.util.Arrays;
 
-@Optional.Interface(modid = "magicultureintegrations", iface = "com.invadermonky.magicultureintegrations.api.tile.IHeatableTile", striprefs = true)
-public abstract class AbstractTileEssentiaSmelter extends TileEntity implements ITickable, IHeatableTile {
+public abstract class AbstractTileEssentiaSmelter extends TileEntity implements ITickable {
     public ItemStackHandler handler = new ItemStackHandler(2) {
         @Override
         public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
@@ -420,62 +417,5 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
     @Override
     public void onDataPacket(@NotNull NetworkManager net, SPacketUpdateTileEntity pkt) {
         this.readFromNBT(pkt.getNbtCompound());
-    }
-
-    //Magiculture Integrations IHeatableTile
-
-    @Optional.Method(modid = "magicultureintegrations")
-    @Override
-    public boolean canSmeltHeatable() {
-        return this.canSmeltItem();
-    }
-
-    @Optional.Method(modid = "magicultureintegrations")
-    @Override
-    public int getBurnTimeHeatable() {
-        return this.burnTime;
-    }
-
-    @Optional.Method(modid = "magicultureintegrations")
-    @Override
-    public int getBurnTimeMaxHeatable() {
-        return this.burnTimeMax;
-    }
-
-    @Optional.Method(modid = "magicultureintegrations")
-    @Override
-    public void setBurnTimeMaxHeatable(int amount) {
-        this.burnTime = amount;
-    }
-
-    @Optional.Method(modid = "magicultureintegrations")
-    @Override
-    public int getCookTimeHeatable() {
-        return this.progress;
-    }
-
-    @Optional.Method(modid = "magicultureintegrations")
-    @Override
-    public int getCookTimeMaxHeatable() {
-        return this.progressMax;
-    }
-
-    @Optional.Method(modid = "magicultureintegrations")
-    @Override
-    public void boostBurnTimeHeatable(int boostAmount) {
-        this.burnTime += boostAmount;
-        this.setBurnTimeMaxHeatable(this.burnTime);
-    }
-
-    @Optional.Method(modid = "magicultureintegrations")
-    @Override
-    public void boostCookTimeHeatable(int boostAmount) {
-        this.progress = Math.min(getCookTimeMaxHeatable() - 1, this.getCookTimeHeatable() + boostAmount);
-    }
-
-    @Optional.Method(modid = "magicultureintegrations")
-    @Override
-    public void updateTileHeatable() {
-        this.markDirty();
     }
 }
