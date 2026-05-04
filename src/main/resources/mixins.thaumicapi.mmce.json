@@ -1,0 +1,13 @@
+{
+  "package": "com.invadermonky.thaumicapi.mixins.mmce" ,
+  "required": false ,
+  "refmap": "mixins.thaumicapi.refmap.json" ,
+  "target": "@env(DEFAULT)" ,
+  "minVersion": "0.8.5" ,
+  "compatibilityLevel": "JAVA_8" ,
+  "mixins": [
+    "JeiPluginMixinMMCE"
+  ] ,
+  "server": [] ,
+  "client": []
+}
