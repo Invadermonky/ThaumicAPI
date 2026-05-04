@@ -14,5 +14,5 @@
 - Adds [`ThaumicAPI#registerInfusionEnchantment()`](https://github.com/Invadermonky/ThaumicAPI/blob/master/src/main/java/com/invadermonky/thaumicapi/api/ThaumicAPI.java) helper method for easily registering new Infusion Enchantments.
 
 ### Thaumcraft Changes:
-- Overhauls Thaumcraft warp events to use an event handler so they can be cancelled or modified.
+- Overhauls Thaumcraft warp events to use [`PlayerWarpEvent`](https://github.com/Invadermonky/ThaumicAPI/blob/master/src/main/java/com/invadermonky/thaumicapi/events/PlayerWarpEvent.java) event handler so they can be modified or cancelled.
 - Overhauls Thaumcraft Essentia Smelter to use `ISmelterAuxiliary` and `ISmelterVent` interfaces instead of hardcoded block checks.
