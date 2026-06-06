@@ -38,11 +38,11 @@ public class WarpEventHandler {
 
         int warpCounter = warpCapability.getCounter();
         if (warpCounter > 0 && totalWarp > 0 && (double) player.world.rand.nextInt(100) <= Math.sqrt(warpCounter)) {
+            playerWarp = (playerWarp + playerWarp + warpCounter) / 3;
             warpCounter = (int) (warpCounter - Math.max(5.0, Math.sqrt(warpCounter) * 2.0 - (gearWarp * 2)));
             warpCapability.setCounter(warpCounter);
-            if(player.world.rand.nextInt(playerWarp) > 0) {
+            if(playerWarp > 0 && player.world.rand.nextInt(playerWarp) > 0) {
                 int eventWarp = playerWarp + gearWarp - PlayerHelper.getWarpProtectionFromGear(player);
-
                 IWarpEvent warpEvent = WarpEventRegistry.getWarpEvent(player, eventWarp);
                 if (warpEvent != null) {
                     performWarpEvent(player, totalWarp, warpEvent);
