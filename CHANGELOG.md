@@ -3,7 +3,7 @@
 ### Added
 - Added NBTTagCompound support for Vis Discount items
 - Added vis discount support for items held in mainhand or offhand
-- Added helper method for adding Vis Discount to items `ThaumicAPI#addWarpingToStack(ItemStack, int)`
+- Added helper method for adding Vis Discount to items `ThaumicAPI#addWarpingToStack(ItemStack, int)` or by adding the `TC.VISDISCOUNT` integer NBT tag to the ItemStack tag compound
 - Added helper method for adding Warping to items `ThaumicAPI#addVisDiscountToStack(ItemStack, int)`
 
 ---
