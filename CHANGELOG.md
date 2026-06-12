@@ -1,4 +1,12 @@
 # Changelog
+## [1.1.1]
+### Changed
+- Modified `AbstractTileEssentiaSmelter` to allow fuel insertion from bottom and item insertion from sides
+### Removed
+- Removed vis discount support for mainhand and offhand to fix exploit
+
+---
+
 ## [1.1.0]
 ### Added
 - Added NBTTagCompound support for Vis Discount items

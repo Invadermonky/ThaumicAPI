@@ -387,9 +387,9 @@ public abstract class AbstractTileEssentiaSmelter extends TileEntity implements 
             if (facing == null) {
                 return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.handler);
             } else if (facing == EnumFacing.UP || facing == EnumFacing.DOWN) {
-                return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.smeltingHandler);
-            } else {
                 return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.fuelHandler);
+            } else {
+                return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.smeltingHandler);
             }
         }
         return super.getCapability(capability, facing);

@@ -46,9 +46,7 @@ public class CasterManagerMixin {
         for(EntityEquipmentSlot slot : EntityEquipmentSlot.values()) {
             ItemStack stack = player.getItemStackFromSlot(slot);
             if(slot == EntityEquipmentSlot.MAINHAND || slot == EntityEquipmentSlot.OFFHAND) {
-                if(!stack.isEmpty() && stack.getItem() instanceof IVisDiscountGear) {
-                    discount += ((IVisDiscountGear) stack.getItem()).getVisDiscount(stack, player);
-                }
+                continue;
             }
             discount += ItemHelper.getNbtVisDiscount(stack);
         }
