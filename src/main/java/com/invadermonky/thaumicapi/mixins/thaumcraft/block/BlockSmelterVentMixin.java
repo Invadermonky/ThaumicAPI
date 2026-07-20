@@ -1,6 +1,6 @@
-package com.invadermonky.thaumicapi.mixins.block;
+package com.invadermonky.thaumicapi.mixins.thaumcraft.block;
 
-import com.invadermonky.thaumicapi.api.block.ISmelterAuxiliary;
+import com.invadermonky.thaumicapi.api.block.ISmelterVent;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.block.Block;
@@ -14,12 +14,12 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import thaumcraft.common.blocks.essentia.BlockSmelterAux;
+import thaumcraft.common.blocks.essentia.BlockSmelterVent;
 import thaumcraft.common.lib.utils.BlockStateUtils;
 
-@Mixin(value = BlockSmelterAux.class, remap = false)
-public abstract class BlockSmelterAuxMixin extends Block implements ISmelterAuxiliary {
-    public BlockSmelterAuxMixin(Material blockMaterialIn, MapColor blockMapColorIn) {
+@Mixin(value = BlockSmelterVent.class, remap = false)
+public abstract class BlockSmelterVentMixin extends Block implements ISmelterVent {
+    public BlockSmelterVentMixin(Material blockMaterialIn, MapColor blockMapColorIn) {
         super(blockMaterialIn, blockMapColorIn);
     }
 
@@ -34,13 +34,13 @@ public abstract class BlockSmelterAuxMixin extends Block implements ISmelterAuxi
     }
 
     @Override
-    public boolean canBoostSmelter(World world, BlockPos pos, IBlockState state, @Nullable TileEntity smelter) {
+    public boolean canVentSmelter(World world, BlockPos pos, IBlockState state, @Nullable TileEntity smelter) {
         EnumFacing facing = BlockStateUtils.getFacing(state);
         return smelter != null && world.getTileEntity(pos.offset(facing)) == smelter;
     }
 
     @Override
-    public int getBonusOperations(World world, BlockPos pos, IBlockState state, @Nullable TileEntity smelter) {
-        return 1;
+    public float getFluxFilterChance(World world, BlockPos pos, IBlockState state, @Nullable TileEntity smelter) {
+        return 0.333f;
     }
 }

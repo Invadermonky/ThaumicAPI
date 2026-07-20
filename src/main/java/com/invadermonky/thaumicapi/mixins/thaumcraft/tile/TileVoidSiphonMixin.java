@@ -1,4 +1,4 @@
-package com.invadermonky.thaumicapi.mixins.tile;
+package com.invadermonky.thaumicapi.mixins.thaumcraft.tile;
 
 import com.invadermonky.thaumicapi.api.impetus.CapabilityImpetusHandler;
 import com.invadermonky.thaumicapi.api.impetus.IImpetusStorage;

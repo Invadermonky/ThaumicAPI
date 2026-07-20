@@ -2,7 +2,7 @@ package com.invadermonky.thaumicapi.utils.helpers;
 
 import com.invadermonky.thaumicapi.api.block.ISmelterAuxiliary;
 import com.invadermonky.thaumicapi.api.block.ISmelterVent;
-import com.invadermonky.thaumicapi.mixins.tile.TileAlembicAccessor;
+import com.invadermonky.thaumicapi.mixins.thaumcraft.tile.TileAlembicAccessor;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;

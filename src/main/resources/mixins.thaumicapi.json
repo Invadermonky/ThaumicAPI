@@ -1,5 +1,5 @@
 {
-  "package": "com.invadermonky.thaumicapi.mixins" ,
+  "package": "com.invadermonky.thaumicapi.mixins.thaumcraft" ,
   "required": true ,
   "refmap": "mixins.thaumicapi.refmap.json" ,
   "target": "@env(DEFAULT)" ,
@@ -8,8 +8,8 @@
   "mixins": [
     "block.BlockSmelterAuxMixin" ,
     "block.BlockSmelterVentMixin" ,
-    "events.PlayerEventsMixin" ,
-    "events.WarpEventsMixin" ,
+    "events.events.PlayerEventsMixin" ,
+    "events.events.WarpEventsMixin" ,
     "items.CasterManagerMixin" ,
     "tile.TileAlembicAccessor" ,
     "tile.TileSmelterMixin" ,

@@ -1,4 +1,4 @@
-package com.invadermonky.thaumicapi.mixins.tile;
+package com.invadermonky.thaumicapi.mixins.thaumcraft.tile;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

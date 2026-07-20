@@ -13,8 +13,9 @@ import java.util.function.Predicate;
 public class MixinLoader implements ILateMixinLoader {
     private static final Map<String, Predicate<Context>> MIXIN_CONFIGS = ImmutableMap.copyOf(new HashMap<String, Predicate<Context>>() {
         {
-            put("mixins.thaumicapi.json", context -> true);
-            put("mixins.thaumicapi.mmce.json", context -> context.isModPresent("modularmachinery"));
+            put("mixins.thaumicapi.json",               c -> true);
+            put("mixins.thaumicapi.mmce.json",          c -> c.isModPresent("modularmachinery") && c.isModPresent("jei"));
+            put("mixins.thaumicapi.multiblocked.json",  c -> c.isModPresent("multiblocked") && c.isModPresent("jei"));
         }
     });
 

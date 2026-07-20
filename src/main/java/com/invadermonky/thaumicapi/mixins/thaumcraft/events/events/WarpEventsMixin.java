@@ -1,4 +1,4 @@
-package com.invadermonky.thaumicapi.mixins.events;
+package com.invadermonky.thaumicapi.mixins.thaumcraft.events.events;
 
 import com.invadermonky.thaumicapi.warpevents.WarpEventHandler;
 import net.minecraft.entity.player.EntityPlayer;

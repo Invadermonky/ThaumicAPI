@@ -1,4 +1,4 @@
-package com.invadermonky.thaumicapi.mixins.events;
+package com.invadermonky.thaumicapi.mixins.thaumcraft.events.events;
 
 import com.invadermonky.thaumicapi.utils.helpers.ItemHelper;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;

@@ -1,4 +1,4 @@
-package com.invadermonky.thaumicapi.mixins.items;
+package com.invadermonky.thaumicapi.mixins.thaumcraft.items;
 
 import com.invadermonky.thaumicapi.utils.helpers.ItemHelper;
 import com.llamalad7.mixinextras.sugar.Local;
