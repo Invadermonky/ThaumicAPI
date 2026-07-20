@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import thaumcraft.api.items.IVisDiscountGear;
 import thaumcraft.common.items.casters.CasterManager;
 
 @Mixin(value = CasterManager.class, remap = false)
