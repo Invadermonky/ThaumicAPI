@@ -1,4 +1,10 @@
 # Changelog
+## [1.1.4]
+### Fixed
+- Fixed ThaumicAPI breaking Multiblocked's AspectList JEI display
+
+---
+
 ## [1.1.3]
 ### Fixed
 - Fixed registry crash when loaded with Multiblocked
