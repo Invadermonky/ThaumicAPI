@@ -1,5 +1,12 @@
 # Changelog
-## [1.1.5]
+## [1.2.0]
+### Added
+- Added `ThamicAPIClient` for api access to client-side methods
+- Added `IDyeableItem` interface for easy dyeable item creation
+- Added `AbstractItemCasterDyeable` to assist with creation of dyable caster items
+- Added prebuilt dyeable item dyeing recipe using the `IDyeableItem` interface
+- Added generic dyeable caster gauntlet models
+- Added Research Category list retrieval to `ThaumicAPI` class. (Prevents retrieving research categories that have no registered research)
 ### Fixed
 - Fixed `AbstractTileEssentiaSmelter` incorrectly calculating actual flux when decreased by an Auxiliary Venting Port
 - Fixed missing heartbeat sound effect when warp events fire

@@ -2,15 +2,13 @@ package com.invadermonky.thaumicapi.api.item;
 
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -23,30 +21,24 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
-import thaumcraft.api.casters.ICaster;
-import thaumcraft.common.items.casters.ItemFocus;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public abstract class AbstractDyeableItemCaster extends AbstractItemCaster implements IDyeableGear {
-    /**
-     * A helper method used to register gauntlet focus color tinting. Simply call this method
-     * when you register the item model.
-     */
-    @SideOnly(Side.CLIENT)
-    public static void initClient(AbstractItemCaster casterItem) {
-        ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
-        IItemColor itemCasterColourHandler = (stack, tintIndex) -> {
-            if (tintIndex == 1 && stack.getItem() instanceof ICaster && ((ICaster) stack.getItem()).getFocus(stack) != null)
-                return ((ItemFocus) ((ICaster) stack.getItem()).getFocus(stack)).getFocusColor(((ICaster) stack.getItem()).getFocusStack(stack));
-            else if (tintIndex == 2 && stack.getItem() instanceof IDyeableGear) {
-                return ((IDyeableGear) stack.getItem()).getDyedColor(stack);
-            }
+public abstract class AbstractItemCasterDyeable extends AbstractItemCaster implements IDyeableItem {
 
-            return -1;
-        };
-        itemColors.registerItemColorHandler(itemCasterColourHandler, casterItem);
+    /**
+     * A basic builder for the gauntlet item. This constructor automatically adds the focus property override.
+     */
+    public AbstractItemCasterDyeable(int augmentSlots) {
+        super(augmentSlots);
+    }
+
+    /**
+     * A default implementation for people who want full control over the item.
+     */
+    public AbstractItemCasterDyeable() {
+        super();
     }
 
     /**
@@ -54,17 +46,10 @@ public abstract class AbstractDyeableItemCaster extends AbstractItemCaster imple
      */
     @Override
     public int getDyedColor(ItemStack stack) {
-        if (!stack.hasTagCompound()) {
-            stack.setTagCompound(new NBTTagCompound());
+        if (stack.getTagCompound() == null || !stack.getTagCompound().hasKey("color", Constants.NBT.TAG_INT)) {
+            stack.setTagInfo("color", new NBTTagInt(this.getDefaultDyedColor(stack)));
         }
-
-        assert stack.getTagCompound() != null;
-        if (stack.getTagCompound().hasKey("color", Constants.NBT.TAG_INT))
-            return stack.getTagCompound().getInteger("color");
-        else {
-            stack.getTagCompound().setInteger("color", getDefaultDyedColor(stack).getMetadata());
-            return stack.getTagCompound().getInteger("color");
-        }
+        return stack.getTagCompound().getInteger("color");
     }
 
     /**
@@ -80,22 +65,14 @@ public abstract class AbstractDyeableItemCaster extends AbstractItemCaster imple
         stack.getTagCompound().setInteger("color", color);
     }
 
-    /**
-     * Gets the default undyed item color from ItemStack.
-     */
-    @Override
-    public ItemStack getDefaultDyedColor(ItemStack stack) {
-        return stack;
-    }
-
     @Override
     public @NotNull EnumActionResult onItemUseFirst(EntityPlayer player, World world, @NotNull BlockPos pos, @NotNull EnumFacing side, float hitX, float hitY, float hitZ, @NotNull EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         IBlockState state = world.getBlockState(pos);
 
         // Right-clicking a filled cauldron with the dyed item will wash it out
-        if (state.getBlock() == Blocks.CAULDRON && state.getValue(BlockCauldron.LEVEL) > 0 && getDyedColor(stack) != getDefaultDyedColor(stack).getMetadata()) {
-            setDyedColor(stack, getDefaultDyedColor(stack).getMetadata());
+        if (state.getBlock() == Blocks.CAULDRON && state.getValue(BlockCauldron.LEVEL) > 0 && getDyedColor(stack) != getDefaultDyedColor(stack)) {
+            setDyedColor(stack, getDefaultDyedColor(stack));
             world.setBlockState(pos, state.withProperty(BlockCauldron.LEVEL, state.getValue(BlockCauldron.LEVEL) - 1));
             world.playSound(null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 0.5F, 1.0F);
             return EnumActionResult.SUCCESS;
@@ -110,7 +87,7 @@ public abstract class AbstractDyeableItemCaster extends AbstractItemCaster imple
         int color = getDyedColor(stack);
 
         // If it's dyed, show it on the tooltip
-        if (color != getDefaultDyedColor(stack).getMetadata()) {
+        if (color != getDefaultDyedColor(stack)) {
             if (tooltip.isAdvanced())
                 list.add(new TextComponentTranslation("item.color", TextFormatting.GRAY + String.format("#%06X", color)).getFormattedText());
             else {

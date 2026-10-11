@@ -2,7 +2,7 @@ package com.invadermonky.thaumicapi.api.item;
 
 import net.minecraft.item.ItemStack;
 
-public interface IDyeableGear {
+public interface IDyeableItem {
     /**
      * Gets the current item dye color.
      */
@@ -16,5 +16,5 @@ public interface IDyeableGear {
     /**
      * Gets the default undyed item color from ItemStack.
      */
-    ItemStack getDefaultDyedColor(ItemStack stack);
+    int getDefaultDyedColor(ItemStack stack);
 }

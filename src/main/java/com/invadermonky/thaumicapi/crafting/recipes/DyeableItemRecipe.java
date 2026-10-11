@@ -1,6 +1,6 @@
-package com.invadermonky.thaumicapi.api.recipe;
+package com.invadermonky.thaumicapi.crafting.recipes;
 
-import com.invadermonky.thaumicapi.api.item.IDyeableGear;
+import com.invadermonky.thaumicapi.api.item.IDyeableItem;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
@@ -23,7 +23,7 @@ public class DyeableItemRecipe extends RecipesArmorDyes {
             ItemStack stack = inv.getStackInSlot(i);
 
             if (stack != null && !stack.isEmpty()) {
-                if (stack.getItem() instanceof IDyeableGear) {
+                if (stack.getItem() instanceof IDyeableItem) {
                     if (hasDyedItem) {
                         return false;
                     } else {
@@ -49,7 +49,7 @@ public class DyeableItemRecipe extends RecipesArmorDyes {
             ItemStack stack = inv.getStackInSlot(i);
 
             if (stack != null && !stack.isEmpty()) {
-                if (stack.getItem() instanceof IDyeableGear) {
+                if (stack.getItem() instanceof IDyeableItem) {
                     if (!toDye.isEmpty()) {
                         return ItemStack.EMPTY;
                     } else {
@@ -67,7 +67,7 @@ public class DyeableItemRecipe extends RecipesArmorDyes {
             ItemStack toOutput = toDye.copy();
             toOutput.setCount(Math.min(toOutput.getCount(), 1));
 
-            int oldColor = ((IDyeableGear) toOutput.getItem()).getDyedColor(toOutput);
+            int oldColor = ((IDyeableItem) toOutput.getItem()).getDyedColor(toOutput);
             float[] totalComponents = new float[]{(oldColor >> 16 & 0xFF) / 255.0F, (oldColor >> 8 & 0xFF) / 255.0F, (oldColor & 0xFF) / 255.0F};
             float totalMaximum = Math.max(totalComponents[0], Math.max(totalComponents[1], totalComponents[2]));
 
@@ -92,7 +92,7 @@ public class DyeableItemRecipe extends RecipesArmorDyes {
             totalComponents[1] *= gainFactor;
             totalComponents[2] *= gainFactor;
             int newColor = ((int) (totalComponents[0] * 255) << 16) + ((int) (totalComponents[1] * 255) << 8) + (int) (totalComponents[2] * 255);
-            ((IDyeableGear) toOutput.getItem()).setDyedColor(toOutput, newColor);
+            ((IDyeableItem) toOutput.getItem()).setDyedColor(toOutput, newColor);
             return toOutput;
         }
 

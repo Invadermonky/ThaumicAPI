@@ -153,9 +153,14 @@ public abstract class AbstractItemCaster extends Item implements IArchitect, ICa
     public static void initClient(AbstractItemCaster casterItem) {
         ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
         IItemColor itemCasterColourHandler = (stack, tintIndex) -> {
-            AbstractItemCaster item = (AbstractItemCaster)stack.getItem();
+            AbstractItemCaster item = (AbstractItemCaster) stack.getItem();
             ItemFocus focus = item.getFocus(stack);
-            return (tintIndex > 0 && focus != null) ? focus.getFocusColor(item.getFocusStack(stack)) : -1;
+            if (tintIndex == 1 && focus != null)
+                return focus.getFocusColor(item.getFocusStack(stack));
+            else if (tintIndex == 2 && stack.getItem() instanceof IDyeableItem) {
+                return ((IDyeableItem) stack.getItem()).getDyedColor(stack);
+            }
+            return -1;
         };
         itemColors.registerItemColorHandler(itemCasterColourHandler, casterItem);
     }

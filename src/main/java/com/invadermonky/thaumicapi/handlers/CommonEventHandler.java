@@ -1,7 +1,7 @@
 package com.invadermonky.thaumicapi.handlers;
 
 import com.invadermonky.thaumicapi.ThaumicAPIMod;
-import com.invadermonky.thaumicapi.api.recipe.DyeableItemRecipe;
+import com.invadermonky.thaumicapi.crafting.recipes.DyeableItemRecipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
