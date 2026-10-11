@@ -22,7 +22,7 @@ public class DyeableItemRecipe extends RecipesArmorDyes {
         for (int i = 0; i < Math.min(inv.getSizeInventory(), 9); ++i) {
             ItemStack stack = inv.getStackInSlot(i);
 
-            if (stack != null && !stack.isEmpty()) {
+            if (!stack.isEmpty()) {
                 if (stack.getItem() instanceof IDyeableItem) {
                     if (hasDyedItem) {
                         return false;
@@ -48,7 +48,7 @@ public class DyeableItemRecipe extends RecipesArmorDyes {
         for (int i = 0; i < Math.min(inv.getSizeInventory(), 9); ++i) {
             ItemStack stack = inv.getStackInSlot(i);
 
-            if (stack != null && !stack.isEmpty()) {
+            if (!stack.isEmpty()) {
                 if (stack.getItem() instanceof IDyeableItem) {
                     if (!toDye.isEmpty()) {
                         return ItemStack.EMPTY;
@@ -63,7 +63,7 @@ public class DyeableItemRecipe extends RecipesArmorDyes {
             }
         }
 
-        if (!toDye.isEmpty() && dyes.size() > 0) {
+        if (!toDye.isEmpty() && !dyes.isEmpty()) {
             ItemStack toOutput = toDye.copy();
             toOutput.setCount(Math.min(toOutput.getCount(), 1));
 

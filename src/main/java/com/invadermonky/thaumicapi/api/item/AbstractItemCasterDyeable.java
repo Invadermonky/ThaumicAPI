@@ -44,6 +44,7 @@ public abstract class AbstractItemCasterDyeable extends AbstractItemCaster imple
     /**
      * Gets the current item dye color.
      */
+    @SuppressWarnings("CosntantConditions")
     @Override
     public int getDyedColor(ItemStack stack) {
         if (stack.getTagCompound() == null || !stack.getTagCompound().hasKey("color", Constants.NBT.TAG_INT)) {
@@ -66,7 +67,7 @@ public abstract class AbstractItemCasterDyeable extends AbstractItemCaster imple
     }
 
     @Override
-    public @NotNull EnumActionResult onItemUseFirst(EntityPlayer player, World world, @NotNull BlockPos pos, @NotNull EnumFacing side, float hitX, float hitY, float hitZ, @NotNull EnumHand hand) {
+    public @NotNull EnumActionResult onItemUseFirst(@NotNull EntityPlayer player, @NotNull World world, @NotNull BlockPos pos, @NotNull EnumFacing side, float hitX, float hitY, float hitZ, @NotNull EnumHand hand) {
         ItemStack stack = player.getHeldItem(hand);
         IBlockState state = world.getBlockState(pos);
 

@@ -635,7 +635,7 @@ public abstract class AbstractItemCaster extends Item implements IArchitect, ICa
     }
 
     static {
-        Method cooldown = null;
+        Method cooldown;
 
         try {
             cooldown = CasterManager.class.getDeclaredMethod("isOnCooldown", EntityLivingBase.class);
