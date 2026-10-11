@@ -11,10 +11,6 @@ import java.util.Set;
 public class ResearchHelper {
     public static final boolean isThaumcraftFixLoaded = Loader.isModLoaded("thaumcraftfix");
 
-    /**
-     * Gets filtered research categories that prevents unused categories from being given.
-     * Requires Thaumcraft Fix.
-     */
     public static ResearchCategory[] getResearchCategories() {
         // Use Thaumcraft Fix's filter if it's also installed.
         if (isThaumcraftFixLoaded) {

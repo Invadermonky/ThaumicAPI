@@ -4,12 +4,14 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import com.invadermonky.thaumicapi.infusion.enchantments.InfusionEnchantmentHelper;
 import com.invadermonky.thaumicapi.utils.helpers.ItemHelper;
+import com.invadermonky.thaumicapi.utils.helpers.ResearchHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import thaumcraft.api.items.IRechargable;
+import thaumcraft.api.research.ResearchCategory;
 import thaumcraft.common.lib.enchantment.EnumInfusionEnchantment;
 
 public class ThaumicAPI {
@@ -66,5 +68,16 @@ public class ThaumicAPI {
      */
     public static ItemStack addWarpingToStack(ItemStack stack, int warp) {
         return ItemHelper.addWarpToStack(stack, warp);
+    }
+
+    /**
+     * Returns a list of filtered research categories to prevent returning categories that do not
+     * have associated research.
+     * <p>
+     * If Thaumcraft Fix is installed, this method will automatically redirect to the overhauled
+     * research theorycraft filter.
+     */
+    public static ResearchCategory[] getResearchCategories() {
+        return ResearchHelper.getResearchCategories();
     }
 }
