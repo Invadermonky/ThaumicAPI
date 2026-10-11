@@ -1,7 +1,11 @@
 package com.invadermonky.thaumicapi.handlers;
 
 import com.invadermonky.thaumicapi.ThaumicAPIMod;
+import com.invadermonky.thaumicapi.api.recipe.DyeableItemRecipe;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -32,5 +36,10 @@ public class CommonEventHandler {
         if (event.getEntity() instanceof EntityPlayer && PlayerMovementAbilityHandler.isValidSideForMovement((EntityPlayer) event.getEntity())) {
             PlayerMovementAbilityHandler.onPlayerRecreation((EntityPlayer) event.getEntity());
         }
+    }
+
+    @SubscribeEvent
+    public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
+        event.getRegistry().register(new DyeableItemRecipe().setRegistryName(new ResourceLocation(ThaumicAPIMod.MOD_ID, "dyeable_item")));
     }
 }
